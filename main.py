@@ -12,6 +12,12 @@ import os
 
 LINE = "Robot vacuum saya menatap tajam ke arah sudut ruangan setelah menelan kaus kaki, seolah sedang merencanakan kudeta."
 
+# The competition gates the line at 1-200 characters: fail loudly if a
+# future edit ever pushes the line over the cap, instead of silently
+# submitting an over-long entry.
+if len(LINE) > 200:
+    raise SystemExit(f"line is {len(LINE)} chars, over the 200-char gate")
+
 
 def main():
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
